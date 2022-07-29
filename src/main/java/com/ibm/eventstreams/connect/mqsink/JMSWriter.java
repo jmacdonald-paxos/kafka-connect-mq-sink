@@ -231,7 +231,7 @@ public class JMSWriter {
         catch (JMSRuntimeException jmse) {
             log.info("Connection to MQ could not be established");
             log.error("JMS exception {}", jmse);
-            handleException(jmse);
+            throw handleException(jmse);
         }
 
         log.trace("[{}]  Exit {}.connect", Thread.currentThread().getId(), this.getClass().getName());
