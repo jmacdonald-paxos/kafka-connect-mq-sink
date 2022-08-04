@@ -86,7 +86,7 @@ public class MQSinkTask extends SinkTask {
         log.trace("[{}] Entry {}.put, records.size={}", Thread.currentThread().getId(), this.getClass().getName(), records.size());
 
         for (SinkRecord r: records) {
-            log.debug("Putting record for topic {}, partition {} and offset {}", r.topic(), r.kafkaPartition(), r.kafkaOffset());
+            log.debug("Putting record {} for topic {}, partition {} and offset {}", r.value(), r.topic(), r.kafkaPartition(), r.kafkaOffset());
             writer.send(r);
         }
 

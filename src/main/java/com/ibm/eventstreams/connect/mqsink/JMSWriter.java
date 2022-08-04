@@ -253,6 +253,7 @@ public class JMSWriter {
         try {
             Message m = builder.fromSinkRecord(jmsCtxt, r);
             inflight = true;
+            log.debug("Sending MQ message: {}", m);
             jmsProd.send(queue, m);
         }
         catch (JMSRuntimeException jmse) {
