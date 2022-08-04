@@ -139,6 +139,10 @@ public class MQSinkConnector extends SinkConnector {
     public static final String CONFIG_DOCUMENTATION_MQ_REPLY_QUEUE = "The name of the reply-to queue, as a queue name or URI.";
     public static final String CONFIG_DISPLAY_MQ_REPLY_QUEUE = "Reply-to queue";
 
+    public static final String CONFIG_NAME_MQ_REPLY_QUEUE_MANAGER = "mq.reply.queue.manager";
+    public static final String CONFIG_DOCUMENTATION_MQ_REPLY_QUEUE_MANAGER = "The name of the reply-to queue manager";
+    public static final String CONFIG_DISPLAY_MQ_REPLY_QUEUE_MANAGER = "Reply-to queue manager";
+
     public static final String CONFIG_NAME_MQ_USER_AUTHENTICATION_MQCSP = "mq.user.authentication.mqcsp";
     public static final String CONFIG_DOCUMENTATION_MQ_USER_AUTHENTICATION_MQCSP = "Whether to use MQ connection security parameters (MQCSP).";
     public static final String CONFIG_DISPLAY_MQ_USER_AUTHENTICATION_MQCSP = "User authentication using MQCSP";
@@ -319,6 +323,10 @@ public class MQSinkConnector extends SinkConnector {
         config.define(CONFIG_NAME_MQ_REPLY_QUEUE, Type.STRING, null, Importance.LOW,
                       CONFIG_DOCUMENTATION_MQ_REPLY_QUEUE, CONFIG_GROUP_MQ, 24, Width.MEDIUM,
                       CONFIG_DISPLAY_MQ_REPLY_QUEUE);
+
+        config.define(CONFIG_NAME_MQ_REPLY_QUEUE_MANAGER, Type.STRING, null, Importance.LOW,
+                      CONFIG_DOCUMENTATION_MQ_REPLY_QUEUE_MANAGER, CONFIG_GROUP_MQ, 25, Width.MEDIUM,
+                      CONFIG_DISPLAY_MQ_REPLY_QUEUE_MANAGER);
 
         config.define(CONFIG_NAME_MQ_USER_AUTHENTICATION_MQCSP, Type.BOOLEAN, Boolean.TRUE, Importance.LOW,
                       CONFIG_DOCUMENTATION_MQ_USER_AUTHENTICATION_MQCSP, CONFIG_GROUP_MQ, 25, Width.SHORT,

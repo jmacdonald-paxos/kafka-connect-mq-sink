@@ -28,6 +28,7 @@ import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
+import com.ibm.msg.client.jms.JmsConstants;
 import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.data.Schema.Type;
 import org.apache.kafka.connect.errors.ConnectException;
@@ -45,6 +46,10 @@ public abstract class BaseMessageBuilder implements MessageBuilder {
     public enum KeyHeader {NONE, CORRELATION_ID};
     protected KeyHeader keyheader = KeyHeader.NONE;
     public Destination replyToQueue;
+
+    public String replyToQueueName;
+
+    public String replyToQueueManagerName;
     public String topicPropertyName;
     public String partitionPropertyName;
     public String offsetPropertyName;
@@ -80,6 +85,8 @@ public abstract class BaseMessageBuilder implements MessageBuilder {
                 }
                 else {
                     replyToQueue = new MQQueue(rtq);
+                    replyToQueueName = rtq;
+                    replyToQueueManagerName = props.get(MQSinkConnector.CONFIG_NAME_MQ_REPLY_QUEUE_MANAGER);
                 }
             }
             catch (JMSException jmse) {
@@ -190,6 +197,10 @@ public abstract class BaseMessageBuilder implements MessageBuilder {
         if (replyToQueue != null) {
             try {
                 m.setJMSReplyTo(replyToQueue);
+                m.setStringProperty(JmsConstants.JMS_IBM_MQMD_REPLYTOQ, replyToQueueName);
+                if (replyToQueueManagerName != null) {
+                    m.setStringProperty(JmsConstants.JMS_IBM_MQMD_REPLYTOQMGR, replyToQueueManagerName);
+                }
             }
             catch (JMSException jmse) {
                 throw new ConnectException("Failed to set reply-to queue", jmse);
